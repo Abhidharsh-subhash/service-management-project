@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+        :root {
+            --accent-color: #8672FF;
+            --text-color: #2E2B41;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+
+        .card-header {
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 1.5rem;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .form-group input {
+            height: 45px;
+            font-size: 1rem;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #d1d1d1;
+        }
+
+        .btn-signup {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 10px;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-signup:hover {
+            background-color: #5a4ac1;
+        }
+
+        .already-account {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        .already-account a {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .already-account a:hover {
+            text-decoration: underline;
+        }
+
+        #error-message {
+            color: #f06272;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">Create an Account</div>
+            <div class="card-body">
+                <p id="error-message"></p>
+                <form id="form">
+                    <div class="form-group">
+                        <label for="firstname-input" class="sr-only">Firstname</label>
+                        <input type="text" name="firstname" id="firstname-input" class="form-control" placeholder="Firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-input" class="sr-only">Email</label>
+                        <input type="email" name="email" id="email-input" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-input" class="sr-only">Password</label>
+                        <input type="password" name="password" id="password-input" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password-input" class="sr-only">Confirm Password</label>
+                        <input type="password" name="repeat-password" id="confirm-password-input" class="form-control" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-signup">Signup</button>
+                </form>
+                <div class="already-account">
+                    <p>Already have an account? <a href="login.html">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('form');
+        const firstname_input = document.getElementById('firstname-input');
+        const email_input = document.getElementById('email-input');
+        const password_input = document.getElementById('password-input');
+        const repeat_password_input = document.getElementById('confirm-password-input');
+        const error_message = document.getElementById('error-message');
+
+        form.addEventListener('submit', (e) => {
+            let errors = [];
+
+            if (firstname_input) {
+                errors = getSignupFormErrors(firstname_input.value, email_input.value, password_input.value, repeat_password_input.value);
+            }
+
+            if (errors.length > 0) {
+                e.preventDefault();
+                error_message.innerText = errors.join(". ");
+            }
+        });
+
+        function getSignupFormErrors(firstname, email, password, repeatPassword) {
+            let errors = [];
+
+            if (firstname === '' || firstname == null) {
+                errors.push('Firstname is required');
+                firstname_input.classList.add('is-invalid');
+            }
+            if (email === '' || email == null) {
+                errors.push('Email is required');
+                email_input.classList.add('is-invalid');
+            }
+            if (password === '' || password == null) {
+                errors.push('Password is required');
+                password_input.classList.add('is-invalid');
+            }
+            if (password.length < 8) {
+                errors.push('Password must have at least 8 characters');
+                password_input.classList.add('is-invalid');
+            }
+            if (password !== repeatPassword) {
+                errors.push('Password does not match repeated password');
+                password_input.classList.add('is-invalid');
+                repeat_password_input.classList.add('is-invalid');
+            }
+
+            return errors;
+        }
+
+        [firstname_input, email_input, password_input, repeat_password_input].forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('is-invalid');
+                error_message.innerText = '';
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

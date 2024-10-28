@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Feedback Form</title>
+    <style>
+        /* Body styling with matching gradient background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg,#4c66ff,#9b56ff);
+        }
+
+        /* Main container for the form */
+        .feedback-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px; /* Makes it responsive */
+            box-sizing: border-box;
+        }
+
+        /* Form heading */
+        .feedback-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: Black;
+        }
+
+        /* Form inputs styling */
+        .feedback-container input[type="text"],
+        .feedback-container input[type="email"],
+        .feedback-container textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box; /* Ensures padding and border are included in width */
+        }
+
+        /* Submit button styling with gradient */
+        .feedback-container button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: white;
+            background: linear-gradient(to right, #4c66ff, #9b56ff);
+            cursor: pointer;
+        }
+
+        /* Hover effect for the button */
+        .feedback-container button:hover {
+            background: linear-gradient(to right, #9b56ff,#4c66ff);
+        }
+
+        /* Responsive design for mobile screens */
+        @media (max-width: 600px) {
+            .feedback-container {
+                padding: 20px;
+            }
+
+            .feedback-container h2 {
+                font-size: 22px;
+            }
+
+            .feedback-container button {
+                font-size: 14px;
+            }
+        }
+
+        /* Additional adjustments for smaller screens */
+        @media (max-width: 400px) {
+            .feedback-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Feedback form container -->
+    <div class="feedback-container">
+        <h2>Feedback</h2>
+        <!-- Form elements for user feedback -->
+        <form method ="post" enctype="multipart/form-data" action="" id="feedbackForm">
+            {% csrf_token %}
+
+            <input type="text" id="name" name="name" placeholder="Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <textarea id="Feedback" name="Feedback" placeholder="Feedback" rows="5" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+
+    <!-- <script>
+        // JavaScript to handle form submission
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevents the form from submitting by default
+
+            // Collect form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const feedback = document.getElementById('Feedback').value;
+
+            // Basic form validation
+            if (name && email && feedback) {
+                alert('Thank you for your feedback!'); // Thank the user for their feedback
+
+                // Here, you can include AJAX or a back-end call to process the form data
+            } else {
+                alert('Please fill in all fields.'); // Alert if not all fields are filled
+            }
+        });
+    </script> -->
+</body>
+</html>
