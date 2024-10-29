@@ -105,6 +105,11 @@
         color: green;
       }
     </style>
+    {% if msg != "" and msg != null %}
+    <script>
+      alert("{{msg}}");
+    </script>
+    {% endif %}
   </head>
   <body>
     <!-- <script src="{% static 'js/jobsheetscript.js' %}"></script> -->

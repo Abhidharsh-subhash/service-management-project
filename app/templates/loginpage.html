@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Reset default margins and paddings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Set the background for the entire page */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        /* Container holding the login card */
+        .login-container {
+            display: flex;
+            width: 800px;
+            height: 400px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Left side: Login form */
+        .login-left {
+            width: 50%;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px 0 0 10px;
+        }
+
+        /* Login form heading */
+        .login-left h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        /* Input fields for username and password */
+        .login-left input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Sign In button styling */
+        .login-left button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #fc466b, #3f5efb);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Additional options for 'Remember Me' and 'Forgot Password' */
+        .login-left .options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .login-left .options label {
+            font-size: 12px;
+        }
+
+        .login-left .options a {
+            color: #fc466b;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        /* Right side: Welcome message */
+        .login-right {
+            width: 50%;
+            background: linear-gradient(to right, #fc466b, #3f5efb);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0 10px 10px 0;
+            color: white;
+            padding: 30px;
+        }
+
+        .login-right h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .login-right p {
+            font-size: 1rem;
+        }
+
+        .login-right button {
+            padding: 10px 25px;
+            background-color: white;
+            color: #fc466b;
+            border-radius: 25px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .login-right button:hover {
+            background-color: #ddd;
+        }
+    </style>
+    {% if msg != "" and msg != null %}
+    <script>
+      alert("{{msg}}");
+    </script>
+    {% endif %}
+</head>
+<body>
+    <!-- Container holding the login form and welcome message -->
+    <div class="login-container">
+        <!-- Left side: Login form -->
+        <div class="login-left">
+            <h2>login</h2>
+            <form id="loginForm" method="post" action="{% url 'login' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="email" placeholder="Email" id="username" name="email" required>
+                <input type="password" placeholder="Password" id="password" name="password" required>
+                <button type="submit">Login</button>
+                <div class="options">
+                    <a href="{% url 'forgotpasswordpage' %}">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+        <!-- Right side: Welcome message -->
+        <div class="login-right">
+            <h2>Welcome to Login</h2>
+            <p>Don't have an account?</p>
+            <button><a href="{% url 'signuppage' %}" style="text-decoration: none;">Sign Up</a></button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle form submission and validation
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation check
+            if (username === '' || password === '') {
+                alert('Please fill in both fields.');
+                return;
+            }
+        });
+    </script>
+</body>
+</html>
+
