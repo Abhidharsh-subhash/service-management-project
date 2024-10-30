@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        /* Global styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full height */
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f6db12;
+            background-color: white;
+        }
+
+        header, footer {
+            background: #35424a;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        header h1 {
+            color: rgb(188, 200, 19);
+        }
+
+        nav {
+            background: #047762;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Center profile card below navbar */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: white;
+            max-width: 500px;
+            width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            flex: 1; /* Allow this section to grow and fill space */
+        }
+
+        .profile-card {
+            text-align: center;
+            width: 100%;
+        }
+
+        .profile-card i {
+            color: #35424a;
+            font-size: 70px;
+            margin-bottom: 10px;
+        }
+
+        .profile-heading {
+            font-size: 24px;
+            font-weight: bold;
+            color: #35424a;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #35424a;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            margin-top: 20px;
+        }
+    </style>
+    {% if msg != "" and msg != null %}
+    <script>
+      alert("{{msg}}");
+    </script>
+    {% endif %}
+    <!-- FontAwesome for Profile Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Service Management System</h1>
+        <p>Your Account Details</p>
+    </header>
+
+    <nav>
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a class="nav-link" href="{% url 'homepage' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#faqs">FAQs</a></li>
+            <li class="nav-item"><a class="nav-link" href="#knowledge-base">Knowledge Base</a></li>
+            <li class="nav-item"><a class="nav-link" href="#submit-ticket">Submit a Ticket</a></li>
+            <li class="nav-item"><a class="nav-link" href="#community">Community Forum</a></li>
+            <li class="nav-item"><a class="nav-link active" href="#profile">Profile</a></li>
+            <li class="nav-item"><a class="nav-link active" href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="profile-card">
+            <i class='fas fa-address-book'></i>
+            <form class="mt-4" method="post" enctype="multipart/form-data" action="{% url 'update_profile' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">UserName</label>
+                    <input type="text" name="username" id="name" value="{{data.username}}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{data.email}}">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Last updateed</label>
+                    <input type="tel" id="phone" value="{{data.updated_at.date}}" readonly>
+                </div>
+                <button type="submit" class="btn">Update Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Service Management. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</body>
+</html>

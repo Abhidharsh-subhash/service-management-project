@@ -12,5 +12,9 @@ urlpatterns = [
     path('verify_email', views.verify_email, name='verify_email'),
     path('setpasswordpage', views.setpasswordpage, name='setpasswordpage'),
     path('forgotpasswordpage', views.forgotpasswordpage, name='forgotpasswordpage'),
-    path('setpassword', views.setpassword, name='setpassword')
+    path('setpassword', views.setpassword, name='setpassword'),
+    path('homepage', views.homepage, name='homepage'),
+    path('profilepage', views.profilepage, name='profilepage'),
+    path('logout', views.logout, name='logout'),
+    path('update_profile', views.update_profile, name='update_profile')
 ]

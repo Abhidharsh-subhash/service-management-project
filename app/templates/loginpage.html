@@ -151,21 +151,6 @@
             <button><a href="{% url 'signuppage' %}" style="text-decoration: none;">Sign Up</a></button>
         </div>
     </div>
-
-    <script>
-        // JavaScript to handle form submission and validation
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Simple validation check
-            if (username === '' || password === '') {
-                alert('Please fill in both fields.');
-                return;
-            }
-        });
-    </script>
 </body>
 </html>
 

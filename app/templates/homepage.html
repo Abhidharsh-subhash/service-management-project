@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Page</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f6db12;
+            background-color: white;
+        }
+
+        header, footer {
+            background: #35424a;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        header h1 {
+            color: rgb(188, 200, 19);
+        }
+
+        nav {
+            background: #047762;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+            margin: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #35424a;
+            padding-bottom: 5px;
+        }
+
+        .faq, .kb-article {
+            margin: 10px 0;
+        }
+
+        #ticket-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #ticket-form label {
+            margin: 5px 0;
+        }
+
+        #ticket-form input, #ticket-form textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #confirmation {
+            margin-top: 10px;
+            color: green;
+            display: none;
+        }
+    </style>
+    {% if msg != "" and msg != null %}
+    <script>
+      alert("{{msg}}");
+    </script>
+    {% endif %}
+</head>
+<body>
+    <header>
+        <h1>Service Management System</h1>
+        <p>We're here to help!</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#knowledge-base">Knowledge Base</a></li>
+            <li><a href="#submit-ticket">Submit a Ticket</a></li>
+            <li><a href="#community">Community Forum</a></li>
+            <li><a href="{% url 'profilepage' %}">Profile</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <section id="contact">
+        <h2>Contact Information</h2>
+        <p>Email: support@example.com</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Live Chat: Available 9 AM - 5 PM</p>
+    </section>
+
+    <section id="faqs">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq">
+            <h3>How do I reset my password?</h3>
+            <p>To reset your password, go to the login page and click on "Forgot Password."</p>
+        </div>
+        <div class="faq">
+            <h3>How can I change my billing information?</h3>
+            <p>You can update your billing information in the account settings under "Billing."</p>
+        </div>
+    </section>
+
+    <section id="knowledge-base">
+        <h2>Knowledge Base</h2>
+        <input type="text" id="search" placeholder="Search articles...">
+        <div class="kb-article">
+            <h3>Getting Started</h3>
+            <p>Learn how to set up your account.</p>
+        </div>
+        <div class="kb-article">
+            <h3>Advanced Features</h3>
+            <p>Explore the advanced functionalities of our service.</p>
+        </div>
+    </section>
+
+    <section id="submit-ticket">
+        <h2>Submit a Ticket</h2>
+        <form id="ticket-form">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" required>
+            <label for="issue">Issue Description:</label>
+            <textarea id="issue" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="confirmation">Your ticket has been submitted!</div>
+    </section>
+
+    <section id="community">
+        <h2>Community Forum</h2>
+        <p>Join discussions with other users.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Service Management. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('ticket-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('confirmation').style.display = 'block';
+            this.reset();
+        });
+    </script>
+</body>
+</html>
