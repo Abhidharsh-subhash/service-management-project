@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Users
+from .models import Users, category, Staffs, Tickets, Feedback, Emergency_support
 
 # Create your views here.
 
@@ -29,7 +29,8 @@ def login(request):
 
 def homepage(request):
     msg = request.GET.get("msg", "")
-    return render(request, "homepage.html", {'msg': msg})
+    categories = category.objects.all()
+    return render(request, "homepage.html", {'msg': msg, 'categories': categories})
 
 
 def profilepage(request):
@@ -64,11 +65,27 @@ def update_profile(request):
 
 
 def ticket(request):
-    return render(request, 'ticket.html')
+    msg = request.GET.get("msg", "")
+    return render(request, 'ticket.html', {'msg': msg})
+
+
+def raise_ticket(request):
+    if request.POST:
+        name = request.POST['name']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
+        issue = request.POST['issue']
+        user = Users.objects.get(id=request.session.get('id'))
+        Tickets.objects.create(
+            user=user, name=name, email=email, phone_number=phone_number, issue=issue)
+        return redirect('/ticket?msg=Ticket raised successfully')
+    return redirect('/ticket?msg=something wenr wrong! Please try again')
 
 
 def ticketspage(request):
-    return render(request, 'ticketspage.html')
+    user = Users.objects.get(id=request.session.get('id'))
+    tickets = Tickets.objects.filter(user=user)
+    return render(request, 'ticketspage.html', {'tickets': tickets})
 
 
 def signuppage(request):
@@ -90,7 +107,22 @@ def signup(request):
 
 def feedbackpage(request):
     msg = request.GET.get("msg", "")
-    return render(request, 'feedbackpage.html', {"msg": msg})
+    user = Users.objects.get(id=request.session.get('id'))
+    tickets = Tickets.objects.filter(user=user)
+    return render(request, 'feedbackpage.html', {"msg": msg, 'tickets': tickets})
+
+
+def submit_feedback(request):
+    if request.POST:
+        ticket_id = request.POST['ticket']
+        rating = request.POST['rating']
+        comment = request.POST['comment']
+        ticket = Tickets.objects.get(id=ticket_id)
+        if Feedback.objects.filter(ticket=ticket).exists():
+            return redirect('/feedbackpage?msg=Feedback for the ticket is already submitted')
+        Feedback.objects.create(ticket=ticket, rating=rating, comment=comment)
+        return redirect('/feedbackpage?msg=Feedback submitted successfully')
+    return redirect('/feedbackpage?msg=Something went wrong! Try again')
 
 
 def forgotpasswordpage(request):
@@ -99,7 +131,21 @@ def forgotpasswordpage(request):
 
 
 def emergencysupport(request):
-    return render(request, 'emergencysupport.html')
+    msg = request.GET.get("msg", "")
+    return render(request, 'emergencysupport.html', {'msg': msg})
+
+
+def submit_emergency(request):
+    if request.POST:
+        name = request.POST['name']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
+        issue = request.POST['issue']
+        user = Users.objects.get(id=request.session.get('id'))
+        Emergency_support.objects.create(
+            user=user, name=name, email=email, phone_number=phone_number, description=issue)
+        return redirect('/emergencysupport?msg=Emergency reported successfully')
+    return redirect('/emergencysupport?msg=Something went wrong. Please try again')
 
 
 def verify_email(request):

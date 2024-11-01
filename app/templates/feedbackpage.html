@@ -146,12 +146,13 @@
 
     <section>
         <h2>Submit Feedback</h2>
-        <form id="feedback-form">
+        <form id="feedback-form" method="post" action="{% url 'submit_feedback' %}">
+            {% csrf_token %}
             <label for="ticket">Select Ticket:</label>
             <select id="ticket" name="ticket" required>
                 <option value="" disabled selected>Select a ticket</option>
                 {% for ticket in tickets %}
-                <option value="{{ ticket.id }}">{{ ticket.issue }}</option>
+                <option value="{{ ticket.id }}">{{ ticket.id }}</option>
                 {% endfor %}
             </select>
 
@@ -159,24 +160,14 @@
             <input type="number" id="rating" name="rating" min="1" max="5" required>
 
             <label for="comments">Comments:</label>
-            <textarea id="comments" name="comments" rows="4" required placeholder="Share your experience..."></textarea>
+            <textarea id="comments" name="comment" rows="4" required placeholder="Share your experience..."></textarea>
 
             <button type="submit">Submit Feedback</button>
-            
-            <p id="feedback-confirmation" style="display: none;">Thank you for your feedback!</p>
         </form>
     </section>
     
     <footer>
         <p>&copy; 2024 Service Management. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.getElementById('feedback-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevents the default form submission
-            document.getElementById('feedback-confirmation').style.display = 'block'; // Shows confirmation message
-            this.reset(); // Resets the form fields
-        });
-    </script>
 </body>
 </html>

@@ -19,5 +19,8 @@ urlpatterns = [
     path('update_profile', views.update_profile, name='update_profile'),
     path('ticket', views.ticket, name='ticket'),
     path('ticketspage', views.ticketspage, name='ticketspage'),
-    path('emergencysupport', views.emergencysupport, name='emergencysupport')
+    path('emergencysupport', views.emergencysupport, name='emergencysupport'),
+    path('submit_feedback', views.submit_feedback, name='submit_feedback'),
+    path('raise_ticket', views.raise_ticket, name='raise_ticket'),
+    path('submit_emergency', views.submit_emergency, name='submit_emergency')
 ]

@@ -126,7 +126,8 @@
     <!-- Emergency Support Submission Form -->
     <section>
         <h2>Submit Emergency Support Request</h2>
-        <form id="emergency-form">
+        <form id="emergency-form" method="post" action="{% url 'submit_emergency' %}">
+            {% csrf_token %}
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -134,27 +135,17 @@
             <input type="email" id="email" name="email" required>
 
             <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+            <input type="tel" id="phone" name="phone_number" required>
 
             <label for="issue">Description of Emergency:</label>
             <textarea id="issue" name="issue" rows="4" required placeholder="Briefly describe the emergency..."></textarea>
 
             <button type="submit">Submit Emergency Request</button>
-
-            <p id="confirmation">Thank you! Your emergency request has been submitted.</p>
         </form>
     </section>
 
     <footer>
         <p>&copy; 2024 Service Management. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.getElementById('emergency-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            document.getElementById('confirmation').style.display = 'block';
-            this.reset();
-        });
-    </script>
 </body>
 </html>

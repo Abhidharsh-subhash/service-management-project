@@ -17,3 +17,6 @@ class Users(admin.ModelAdmin):
 
 admin.site.register(models.category)
 admin.site.register(models.Staffs)
+admin.site.register(models.Feedback)
+admin.site.register(models.Tickets)
+admin.site.register(models.Emergency_support)

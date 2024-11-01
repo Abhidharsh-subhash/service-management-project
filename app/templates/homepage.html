@@ -125,16 +125,18 @@
     </nav>
 
     <main class="categories">
+        {% if categories %}
         <h2>Available Services</h2> <!-- New heading for available services -->
+        {% else %}
+        <h2>No Services Available</h2>
+        {% endif %}
         <div class="category-container">
+            {% for i in categories %}
             <div class="category">
-                <h3>Technical Support</h3>
-                <p class="staff-count">5 Staff Available</p>
+                <h3>{{i.category_name}}</h3>
+                <p class="staff-count">{{i.staff_count}} Staff Available</p>
             </div>
-            <div class="category">
-                <h3>Customer Service</h3>
-                <p class="staff-count">8 Staff Available</p>
-            </div>
+            {% endfor %}
         </div>
     </main>
 

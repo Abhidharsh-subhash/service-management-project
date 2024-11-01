@@ -130,32 +130,26 @@
     <!-- Ticket Submission Form -->
     <section>
         <h2>Create a New Ticket</h2>
-        <form id="ticket-form">
+        <form id="ticket-form" method="post" action="{% url 'raise_ticket' %}">
+            {% csrf_token %}
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
+            <label for="email">Phone Number:</label>
+            <input type="phone" id="email" name="phone_number" required>
+
             <label for="issue">Issue:</label>
-            <textarea id="issue" name="issue" rows="4" required></textarea>
+            <textarea id="issue" name="issue" rows="4" placeholder="Briefly describe the issue..." required></textarea>
 
             <button type="submit">Submit Ticket</button>
-
-            <p id="confirmation">Thank you! Your ticket has been submitted.</p>
         </form>
     </section>
 
     <footer>
         <p>&copy; 2024 Service Management. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.getElementById('ticket-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            document.getElementById('confirmation').style.display = 'block';
-            this.reset();
-        });
-    </script>
 </body>
 </html>

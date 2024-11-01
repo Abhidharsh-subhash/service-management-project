@@ -163,7 +163,7 @@
                     <td>{{ ticket.id }}</td>
                     <td>{{ ticket.issue }}</td>
                     <td>{{ ticket.status }}</td>
-                    <td>{{ ticket.date_submitted }}</td>
+                    <td>{{ ticket.created_at.date }}</td>
                 </tr>
                 {% empty %}
                 <tr>
