@@ -32,6 +32,9 @@ class Staffs(models.Model):
     experience = models.FloatField()
     about = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.name
+
 
 class Tickets(models.Model):
     PENDING = "Pending"
