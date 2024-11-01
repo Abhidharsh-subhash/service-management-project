@@ -63,6 +63,14 @@ def update_profile(request):
         return redirect('/profilepage?msg=Profile updated successfully')
 
 
+def ticket(request):
+    return render(request, 'ticket.html')
+
+
+def ticketspage(request):
+    return render(request, 'ticketspage.html')
+
+
 def signuppage(request):
     msg = request.GET.get("msg", "")
     return render(request, 'signup.html', {"msg": msg})
@@ -82,12 +90,16 @@ def signup(request):
 
 def feedbackpage(request):
     msg = request.GET.get("msg", "")
-    return render(request, 'feedback.html', {"msg": msg})
+    return render(request, 'feedbackpage.html', {"msg": msg})
 
 
 def forgotpasswordpage(request):
     msg = request.GET.get("msg", "")
     return render(request, 'forgotpassword.html', {"msg": msg})
+
+
+def emergencysupport(request):
+    return render(request, 'emergencysupport.html')
 
 
 def verify_email(request):

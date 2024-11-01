@@ -138,11 +138,11 @@
     <nav>
         <ul class="nav justify-content-center">
             <li class="nav-item"><a class="nav-link" href="{% url 'homepage' %}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#faqs">FAQs</a></li>
-            <li class="nav-item"><a class="nav-link" href="#knowledge-base">Knowledge Base</a></li>
-            <li class="nav-item"><a class="nav-link" href="#submit-ticket">Submit a Ticket</a></li>
-            <li class="nav-item"><a class="nav-link" href="#community">Community Forum</a></li>
-            <li class="nav-item"><a class="nav-link active" href="#profile">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'feedbackpage' %}">Report Feedback</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'emergencysupport' %}">Emergency support</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'ticket' %}">Submit a Ticket</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'ticketspage' %}">Ticket's List</a></li>
+            <li class="nav-item"><a class="nav-link active" href="{% url 'profilepage' %}">Profile</a></li>
             <li class="nav-item"><a class="nav-link active" href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </nav>
@@ -161,7 +161,7 @@
                     <input type="email" id="email" name="email" value="{{data.email}}">
                 </div>
                 <div class="form-group">
-                    <label for="phone">Last updateed</label>
+                    <label for="phone">Last updated</label>
                     <input type="tel" id="phone" value="{{data.updated_at.date}}" readonly>
                 </div>
                 <button type="submit" class="btn">Update Profile</button>

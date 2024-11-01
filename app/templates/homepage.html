@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Page</title>
+    <title>Support Categories</title>
     <style>
         /* Global styles */
         body {
@@ -11,8 +11,10 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f6db12;
-            background-color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: white; /* Removed yellow background */
         }
 
         header, footer {
@@ -47,40 +49,55 @@
             text-decoration: none;
         }
 
-        section {
+        /* Centering the categories */
+        .categories {
+            display: flex;
+            flex-direction: column; /* Stack categories vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            flex-grow: 1; /* Allows main content to grow */
             padding: 20px;
-            margin: 10px;
+        }
+
+        .category-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two categories per row */
+            gap: 20px;
+            width: 100%; /* Full width for the grid */
+            max-width: 800px; /* Max width for better layout on large screens */
+        }
+
+        .category {
             background: white;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+
+        .category:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .category h3 {
+            margin: 0;
+            color: #35424a;
+        }
+
+        .staff-count {
+            font-size: 1.2rem;
+            color: #047762;
+        }
+
+        footer {
+            padding: 20px 0;
+            margin-top: auto; /* Keeps footer at the bottom */
         }
 
         h2 {
-            border-bottom: 2px solid #35424a;
-            padding-bottom: 5px;
-        }
-
-        .faq, .kb-article {
-            margin: 10px 0;
-        }
-
-        #ticket-form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        #ticket-form label {
-            margin: 5px 0;
-        }
-
-        #ticket-form input, #ticket-form textarea {
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        #confirmation {
-            margin-top: 10px;
-            color: green;
-            display: none;
+            color: #35424a; /* Style for the heading */
+            margin-bottom: 20px; /* Space below the heading */
         }
     </style>
     {% if msg != "" and msg != null %}
@@ -92,80 +109,37 @@
 <body>
     <header>
         <h1>Service Management System</h1>
-        <p>We're here to help!</p>
+        <p>Available Support Categories</p>
     </header>
 
     <nav>
         <ul>
-            <li><a href="#contact">Contact Us</a></li>
-            <li><a href="#faqs">FAQs</a></li>
-            <li><a href="#knowledge-base">Knowledge Base</a></li>
-            <li><a href="#submit-ticket">Submit a Ticket</a></li>
-            <li><a href="#community">Community Forum</a></li>
-            <li><a href="{% url 'profilepage' %}">Profile</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'homepage' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'feedbackpage' %}">Report Feedback</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'emergencysupport' %}">Emergency Support</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'ticket' %}">Submit a Ticket</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'ticketspage' %}">Ticket's List</a></li>
+            <li class="nav-item"><a class="nav-link active" href="{% url 'profilepage' %}">Profile</a></li>
+            <li class="nav-item"><a class="nav-link active" href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </nav>
 
-    <section id="contact">
-        <h2>Contact Information</h2>
-        <p>Email: support@example.com</p>
-        <p>Phone: (123) 456-7890</p>
-        <p>Live Chat: Available 9 AM - 5 PM</p>
-    </section>
-
-    <section id="faqs">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq">
-            <h3>How do I reset my password?</h3>
-            <p>To reset your password, go to the login page and click on "Forgot Password."</p>
+    <main class="categories">
+        <h2>Available Services</h2> <!-- New heading for available services -->
+        <div class="category-container">
+            <div class="category">
+                <h3>Technical Support</h3>
+                <p class="staff-count">5 Staff Available</p>
+            </div>
+            <div class="category">
+                <h3>Customer Service</h3>
+                <p class="staff-count">8 Staff Available</p>
+            </div>
         </div>
-        <div class="faq">
-            <h3>How can I change my billing information?</h3>
-            <p>You can update your billing information in the account settings under "Billing."</p>
-        </div>
-    </section>
-
-    <section id="knowledge-base">
-        <h2>Knowledge Base</h2>
-        <input type="text" id="search" placeholder="Search articles...">
-        <div class="kb-article">
-            <h3>Getting Started</h3>
-            <p>Learn how to set up your account.</p>
-        </div>
-        <div class="kb-article">
-            <h3>Advanced Features</h3>
-            <p>Explore the advanced functionalities of our service.</p>
-        </div>
-    </section>
-
-    <section id="submit-ticket">
-        <h2>Submit a Ticket</h2>
-        <form id="ticket-form">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" required>
-            <label for="issue">Issue Description:</label>
-            <textarea id="issue" required></textarea>
-            <button type="submit">Submit</button>
-        </form>
-        <div id="confirmation">Your ticket has been submitted!</div>
-    </section>
-
-    <section id="community">
-        <h2>Community Forum</h2>
-        <p>Join discussions with other users.</p>
-    </section>
+    </main>
 
     <footer>
         <p>&copy; 2024 Service Management. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.getElementById('ticket-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            document.getElementById('confirmation').style.display = 'block';
-            this.reset();
-        });
-    </script>
 </body>
 </html>

@@ -16,5 +16,8 @@ urlpatterns = [
     path('homepage', views.homepage, name='homepage'),
     path('profilepage', views.profilepage, name='profilepage'),
     path('logout', views.logout, name='logout'),
-    path('update_profile', views.update_profile, name='update_profile')
+    path('update_profile', views.update_profile, name='update_profile'),
+    path('ticket', views.ticket, name='ticket'),
+    path('ticketspage', views.ticketspage, name='ticketspage'),
+    path('emergencysupport', views.emergencysupport, name='emergencysupport')
 ]

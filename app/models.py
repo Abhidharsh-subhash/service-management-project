@@ -11,3 +11,22 @@ class Users(models.Model):
 
     def __str__(self):
         return self.username
+
+
+class category(models.Model):
+    category_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.category_name
+
+
+class Staffs(models.Model):
+    name = models.CharField(max_length=30)
+    category = models.ForeignKey(
+        category, on_delete=models.SET_NULL, related_name='staff_category', null=True)
+    experience = models.FloatField()
+    about = models.CharField(max_length=30)
+
+
+class Tickets(models.Model):
+    pass

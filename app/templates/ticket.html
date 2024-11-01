@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Page</title>
+    <style>
+        /* Global styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        header, footer {
+            background: #35424a;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        header h1 {
+            color: rgb(188, 200, 19);
+        }
+
+        nav {
+            background: #047762;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+            margin: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #35424a;
+            padding-bottom: 5px;
+        }
+
+        .faq, .kb-article {
+            margin: 10px 0;
+        }
+
+        #ticket-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #ticket-form label {
+            margin: 5px 0;
+        }
+
+        #ticket-form input, #ticket-form textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        #ticket-form button {
+            padding: 10px;
+            background-color: #047762;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        #confirmation {
+            margin-top: 10px;
+            color: green;
+            display: none;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px 0;
+        }
+    </style>
+    {% if msg != "" and msg != null %}
+    <script>
+      alert("{{msg}}");
+    </script>
+    {% endif %}
+</head>
+<body>
+    <header>
+        <h1>Service Management System</h1>
+        <p>Raise your Issue</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li class="nav-item"><a class="nav-link" href="{% url 'homepage' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'feedbackpage' %}">Report Feedback</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'emergencysupport' %}">Emergency support</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'ticket' %}">Submit a Ticket</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'ticketspage' %}">Ticket's List</a></li>
+            <li class="nav-item"><a class="nav-link active" href="{% url 'profilepage' %}">Profile</a></li>
+            <li class="nav-item"><a class="nav-link active" href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Ticket Submission Form -->
+    <section>
+        <h2>Create a New Ticket</h2>
+        <form id="ticket-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="issue">Issue:</label>
+            <textarea id="issue" name="issue" rows="4" required></textarea>
+
+            <button type="submit">Submit Ticket</button>
+
+            <p id="confirmation">Thank you! Your ticket has been submitted.</p>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Service Management. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('ticket-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('confirmation').style.display = 'block';
+            this.reset();
+        });
+    </script>
+</body>
+</html>
